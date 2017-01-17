@@ -10,58 +10,60 @@
 
 下面是实现代码：
 
-JS版：
+JS描述：
 
 ```js
-//交换数组元素
+// 交换函数
 function swap(array, i, j) {
-  var temp = array[i];
-  array[i] = array[j];
-  array[j] = temp;
-} 
+    var temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
+}
 
-//选择排序
+// 选择排序
 function selectSort(array) {
-  var i, j;
-  var indexOfMin;       //用于标识每趟比较中最小值的索引
-  var size = array.length;
+    var i, j;
+    var indexOfMin;                 // 用于标识每趟比较中最小值的索引
+    var size = array.length;
   
-  for (i = 0; i < size - 1; i++) {
-    indexOfMin = i;     //每次初始化最小值的索引为第一个
+    for (i = 0; i < size - 1; i++) {
+        indexOfMin = i;             // 每次初始化最小值的索引为第一个
     
-    for (j = i + 1; j < size; j++) {
-      if (array[j] < array[indexOfMin]) {
-        indexOfMin = j; //如果找到更小的值则更新indexOfMin
-      }
-    }
+        for (j = i + 1; j < size; j++) {
+            if (array[j] < array[indexOfMin]) {
+                indexOfMin = j;     // 如果找到更小的值则更新indexOfMin
+            }
+        }
     
-    //交换
-    if (i != indexOfMin) {
-      swap(array, i, indexOfMin);
+        // 交换
+        if (i != indexOfMin) {
+            swap(array, i, indexOfMin);
+        }
     }
-  }
 }
 
 var array = [39, 28, 57, 12, 95, 45, 10, 73];
 
 selectSort(array);
 
-console.log(array);
+console.log(array);     // 输出：[10, 12, 28, 39, 45, 57, 73, 95]
 ```
 
-Java版：
+Java描述：
 
 ```java
 package algorithm;
 
 public class Sorting {
 
+    // 交换方法
     private static void swap(int[] array, int i, int j) {
         int temp = array[i];
         array[i] = array[j];
         array[j] = temp;
     }
 
+    // 选择排序
     public static void selectSort(int[] array) {
         int i, j, indexOfMin;
         int size = array.length;
@@ -93,13 +95,15 @@ public class Sorting {
 }
 ```
 
-C语言版：
+C语言描述：
 
 ```c
 #include <stdio.h>
 
-void selectSort(int *array, int size);
+// 交换函数
 void swap(int *array, int i, int j);
+// 选择排序
+void selectSort(int *array, int size);
 
 int main(int argc, const char * argv[]) {
     
@@ -116,6 +120,14 @@ int main(int argc, const char * argv[]) {
     return 0;
 }
 
+// 交换函数
+void swap(int *array, int i, int j) {
+    int temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
+}
+
+// 选择排序
 void selectSort(int *array, int size) {
     
     int i, j;
@@ -136,11 +148,5 @@ void selectSort(int *array, int size) {
             swap(array, i, indexOfMin);
         }
     }
-}
-
-void swap(int *array, int i, int j) {
-    int temp = array[i];
-    array[i] = array[j];
-    array[j] = temp;
 }
 ```

@@ -56,14 +56,14 @@ package algorithm;
 
 public class Sorting {
 	
-	// 交换
+    // 交换
     private static void swap(int[] array, int i, int j) {
         int temp = array[i];
         array[i] = array[j];
         array[j] = temp;
     }
 
-	// 冒泡排序
+    // 冒泡排序
     public static void bubbleSort(int[] array) {
         int i, j;
         int size = array.length;

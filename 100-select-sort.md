@@ -44,7 +44,7 @@ var array = [39, 28, 57, 12, 95, 45, 10, 73];
 
 selectSort(array);
 
-console.log(array);     // 输出：[10, 12, 28, 39, 45, 57, 73, 95]
+console.log(array);
 ```
 
 Java描述：
@@ -53,7 +53,6 @@ Java描述：
 package algorithm;
 
 public class Sorting {
-
     // 交换方法
     private static void swap(int[] array, int i, int j) {
         int temp = array[i];
@@ -104,7 +103,6 @@ void swap(int *array, int i, int j);
 void selectSort(int *array, int size);
 
 int main(int argc, const char * argv[]) {
-    
     int array[] = {39, 28, 57, 12, 95, 45, 10, 73};
     
     int size = sizeof(array) / sizeof(array[0]);
@@ -127,16 +125,13 @@ void swap(int *array, int i, int j) {
 
 // 选择排序
 void selectSort(int *array, int size) {
-    
     int i, j;
     int indexOfMin;
     
     for (i = 0; i < size - 1; i++) {
-        
         indexOfMin = i;
         
         for (j = i + 1; j < size; j++) {
-            
             if (array[j] < array[indexOfMin]) {
                 indexOfMin = j;
             }

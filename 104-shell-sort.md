@@ -106,7 +106,6 @@ void shellSort(int *array, int size);
 void groupsInsertSort(int *array, int size, int increment);
 
 int main(int argc, const char * argv[]) {
-    
     int array[] = {39, 28, 57, 12, 95, 45, 10, 73};
     
     int size = sizeof(array) / sizeof(array[0]);
@@ -131,7 +130,6 @@ void shellSort(int *array, int size) {
 }
 
 void groupsInsertSort(int *array, int size, int increment) {
-    
     int i, j, key;
     
     for (i = increment; i < size; i++) {

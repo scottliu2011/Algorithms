@@ -154,7 +154,6 @@ int partition(int *array, int low, int high);
 void swap(int *array, int i, int j);
 
 int main(int argc, const char * argv[]) {
-    
     int array[] = {39, 28, 57, 12, 95, 45, 10, 73};
     
     int size = sizeof(array) / sizeof(array[0]);

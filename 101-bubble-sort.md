@@ -55,7 +55,6 @@ Java描述：
 package algorithm;
 
 public class Sorting {
-	
     // 交换
     private static void swap(int[] array, int i, int j) {
         int temp = array[i];
@@ -132,12 +131,10 @@ int main(int argc, const char * argv[]) {
 
 // 冒泡排序
 void bubbleSort(int *array, int size) {
-    
     int i, j;
     Bool swapped;
     
     for (i = 0; i < size; i++) {
-        
         swapped = FALSE;
         
         for (j = 0; j < size - 1 - i; j++) {

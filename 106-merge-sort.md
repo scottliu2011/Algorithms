@@ -152,7 +152,6 @@ void mergeSort(int *array, int low, int high);
 void merge(int *array, int low, int mid, int high);
 
 int main(int argc, const char * argv[]) {
-    
     int array[] = {39, 28, 57, 12, 95, 45, 10, 73};
     
     int size = sizeof(array) / sizeof(array[0]);

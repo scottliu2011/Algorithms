@@ -17,14 +17,14 @@ function getInsertPosition(array, keyIndex) {
   var mid;
   
   while (low <= high) {
-  	mid = Math.floor((low + high) / 2);
+    mid = Math.floor((low + high) / 2);
     
     if (array[mid] > key) {
       // 如果中间位置的值大于当前key值，则高位变为mid-1，在前半部分继续比较
-	  high = mid - 1;
+      high = mid - 1;
     } else {
       // 如果中间位置的值小于当前key值，则低位变为mid+1，在后边部分继续比较
-	  low = mid + 1;
+      low = mid + 1;
     }
   }
   
@@ -130,7 +130,6 @@ void binaryInsertSort(int *array, int size);
 int getInsertPosition(int *array, int keyIndex);
 
 int main(int argc, const char * argv[]) {
-    
     int array[] = {39, 28, 57, 12, 95, 45, 10, 73};
     
     int size = sizeof(array) / sizeof(array[0]);
@@ -145,7 +144,6 @@ int main(int argc, const char * argv[]) {
 }
 
 void binaryInsertSort(int *array, int size) {
-    
     int i, j, key;
     
     int position;

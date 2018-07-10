@@ -12,21 +12,21 @@
 
 下面是实现代码：
 
-JS版：
+JS描述：
 
 ```js
-//归并排序
+// 归并排序
 function mergeSort(array) {
-  //合并左右两个区间
+  // 合并左右两个区间
   var merge = function(low, mid, high) {
-    var tmpArray = [];  //创建临时数组，用于存放合并结果
-    var i = low;        //左区间指针
-    var j = mid + 1;    //右区间指针
-    var k = 0;          //临时数组指针
+    var tmpArray = [];  // 创建临时数组，用于存放合并结果
+    var i = low;        // 左区间指针
+    var j = mid + 1;    // 右区间指针
+    var k = 0;          // 临时数组指针
 
-    //逐个将左半区间和右半区间按顺序放入临时数组
+    // 逐个将左半区间和右半区间按顺序放入临时数组
     while (i <= mid && j <= high) {
-      //将较小的元素存入临时数组，对应区间的指针和临时数组指针各推进一位
+      // 将较小的元素存入临时数组，对应区间的指针和临时数组指针各推进一位
       if (array[i] < array[j]) {
         tmpArray[k++] = array[i++];
       } else {
@@ -34,40 +34,40 @@ function mergeSort(array) {
       }
     }
 
-    //将左半区间剩余元素放入临时数组
+    // 将左半区间剩余元素放入临时数组
     while (i <= mid) {
       tmpArray[k++] = array[i++];
     }
-    //将右半区间剩余元素放入临时数组
+    // 将右半区间剩余元素放入临时数组
     while (j <= high) {
       tmpArray[k++] = array[j++];
     }
 
-    k--;  //退后一位，指向临时数组最后一个元素
+    k--;  // 退后一位，指向临时数组最后一个元素
 
-    //复制临时数组元素到源数组
+    // 复制临时数组元素到源数组
     while (k >= 0) {
       array[low + k] = tmpArray[k];
       k--;
     }
   },
-  //对指定区间进行合并
+  // 对指定区间进行合并
   mergeRange = function(low, high) {
     if (low < high) {
-      //获取中间位
+      // 获取中间位
       var mid = Math.floor((low + high) / 2);
       
-      //对左半区间进行合并
+      // 对左半区间进行合并
       mergeRange(low, mid);
-      //对右半区间进行合并
+      // 对右半区间进行合并
       mergeRange(mid + 1, high);
     
-      //左右子区间合并完成后，进行当前区间的合并
+      // 左右子区间合并完成后，进行当前区间的合并
       merge(low, mid, high);
     }
   };
   
-  //对数组整个区间合并
+  // 对数组整个区间合并
   mergeRange(0, array.length - 1);
 }
 
@@ -78,7 +78,7 @@ mergeSort(array);
 console.log(array);
 ```
 
-Java版：
+Java描述：
 
 ```java
 package algorithm;
@@ -142,7 +142,7 @@ public class Sorting {
 }
 ```
 
-C语言版：
+C语言描述：
 
 ```c
 #include <stdio.h>
@@ -178,7 +178,7 @@ void mergeSort(int *array, int low, int high) {
 }
 
 void merge(int *array, int low, int mid, int high) {
-    //创建临时数组
+    // 创建临时数组
     int *tempArray = (int *) malloc(sizeof(int) * (high - low + 1));
     
     int i = low;
@@ -207,7 +207,7 @@ void merge(int *array, int low, int mid, int high) {
         k--;
     }
     
-    //释放临时数组
+    // 释放临时数组
     free(tempArray);
 }
 ```

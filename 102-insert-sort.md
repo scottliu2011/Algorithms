@@ -2,9 +2,9 @@
 
 而直接插入排序是和前面有序序列的元素逐个进行比较，直至找到合适的位置，然后插入。
 
-我们还是对n个元素数组从小到大来排序，下面是直接插入排序的实现代码：
+我们还是对 n 个元素数组从小到大来排序，下面是直接插入排序的实现代码：
 
-JS描述：
+JavaScript 语言描述：
 
 ```js
 // 直接插入排序
@@ -33,7 +33,7 @@ insertSort(array);
 console.log(array);
 ```
 
-Java描述：
+Java 语言描述：
 
 ```java
 package algorithm;
@@ -69,7 +69,7 @@ public class Sorting {
 }
 ```
 
-C语言描述：
+C 语言描述：
 
 ```c
 #include <stdio.h>

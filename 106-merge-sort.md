@@ -10,19 +10,17 @@
 
 所以，归并操作是递归的，不断的划分左右子区间，对左右子区间再次进行同样的操作，最后合并左右子区间。
 
-下面是实现代码：
-
-JS描述：
+JavaScript 语言描述：
 
 ```js
 // 归并排序
 function mergeSort(array) {
   // 合并左右两个区间
-  var merge = function(low, mid, high) {
-    var tmpArray = [];  // 创建临时数组，用于存放合并结果
-    var i = low;        // 左区间指针
-    var j = mid + 1;    // 右区间指针
-    var k = 0;          // 临时数组指针
+  let merge = function(low, mid, high) {
+    let tmpArray = [];  // 创建临时数组，用于存放合并结果
+    let i = low;        // 左区间指针
+    let j = mid + 1;    // 右区间指针
+    let k = 0;          // 临时数组指针
 
     // 逐个将左半区间和右半区间按顺序放入临时数组
     while (i <= mid && j <= high) {
@@ -55,7 +53,7 @@ function mergeSort(array) {
   mergeRange = function(low, high) {
     if (low < high) {
       // 获取中间位
-      var mid = Math.floor((low + high) / 2);
+      let mid = Math.floor((low + high) / 2);
       
       // 对左半区间进行合并
       mergeRange(low, mid);
@@ -71,14 +69,14 @@ function mergeSort(array) {
   mergeRange(0, array.length - 1);
 }
 
-var array = [39, 28, 57, 12, 95, 45, 10, 73];
+let array = [39, 28, 57, 12, 95, 45, 10, 73];
 
 mergeSort(array);
 
 console.log(array);
 ```
 
-Java描述：
+Java 语言描述：
 
 ```java
 package algorithm;
@@ -142,7 +140,7 @@ public class Sorting {
 }
 ```
 
-C语言描述：
+C 语言描述：
 
 ```c
 #include <stdio.h>

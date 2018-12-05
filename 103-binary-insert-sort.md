@@ -4,9 +4,7 @@
 
 最终我们可以获取到一个合适的位置，先将这个位置及以后的元素统一向后挪动一位，然后将带插入元素值放入这个位置。
 
-下面是实现代码：
-
-JS描述：
+JavaScript 语言描述：
 
 ```js
 // 获取插入位置
@@ -28,7 +26,7 @@ function getInsertPosition(array, keyIndex) {
     }
   }
   
-  // high+1即要插入的位置
+  // high+1 即是要插入的位置
   return high + 1;
 }
 
@@ -62,7 +60,7 @@ binaryInsertSort(array);
 console.log(array);
 ```
 
-Java描述：
+Java 语言描述：
 
 ```java
 package algorithm;
@@ -121,7 +119,7 @@ public class Sorting {
 }
 ```
 
-C语言描述：
+C 语言描述：
 
 ```c
 #include <stdio.h>

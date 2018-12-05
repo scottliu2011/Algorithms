@@ -6,24 +6,22 @@
 
 然后对分隔位左边和右边的区间进行排序，依此类推，分而治之。
 
-下面是实现代码：
-
-JS描述：
+JavaScript 语言描述：
 
 ```js
 // 快速排序
 function quickSort(array) {
   // 交换数组元素
-  var swap = function(i, j) {
-    var temp = array[i];
+  let swap = function(i, j) {
+    let temp = array[i];
     array[i] = array[j];
     array[j] = temp;
   },
   // 对指定区间进行划分，使较小的元素都在左边，较大元素都在右边，最后返回分隔位索引
   partition = function(low, high) {
     // 主元素值可以任意选取，这里取当前区间的中间位的元素值
-    var mid = Math.floor((low + high) / 2);
-    var pivot = array[mid];
+    let mid = Math.floor((low + high) / 2);
+    let pivot = array[mid];
     
     // 低位索引<=高位索引时比较和交换
     while (low <= high) {
@@ -50,12 +48,12 @@ function quickSort(array) {
   // 对指定区间进行排序
   quickRangeSort = function(low, high) {
     // 区间的大小
-    var range = high - low + 1;
+    let range = high - low + 1;
     
     // 当区间大于1时，做进一步划分，并对子区间进行排序
     if (range > 1) {
       // 获取分隔位索引
-      var index = partition(low, high);
+      let index = partition(low, high);
       
       // 对左子区间进行排序
       if (low < index - 1) {
@@ -73,14 +71,14 @@ function quickSort(array) {
   quickRangeSort(0, array.length - 1);
 }
 
-var array = [39, 28, 57, 12, 95, 45, 10, 73];
+let array = [39, 28, 57, 12, 95, 45, 10, 73];
 
 quickSort(array);
 
 console.log(array);
 ```
 
-Java描述：
+Java 语言描述：
 
 ```java
 package algorithm;
@@ -144,7 +142,7 @@ public class Sorting {
 }
 ```
 
-C语言描述：
+C 语言描述：
 
 ```c
 #include <stdio.h>

@@ -1,12 +1,10 @@
-冒泡排序是一种相邻元素之间比较和交换的排序算法，n个元素的数组从小到大排序时，每一轮比较都会使较大的元素冒泡到数组的末尾，然后这个过程会执行n-1趟。
+冒泡排序是一种相邻元素之间比较和交换的排序算法，n 个元素的数组从小到大排序时，每一轮比较都会使较大的元素冒泡到数组的末尾，然后这个过程会执行 n-1 趟。
 
 由于第一趟比较之后，最大的元素冒泡到了数组末尾，下一次再比较时，待排序区间就减去一个元素的位置，依次类推，每次新的待排序区间等于原数组区间减去已排序次数。
 
 由于每一趟排序都需要比较相邻元素的大小，如果数组待排序区域剩余的元素已经是排好序了，那么再进行下一轮比较就很多余，我们可以增加一个标志位标识一趟比较中是否发生了交换操作，如果交换没有发生，证明已排序完毕，直接结束程序。
 
-下面是代码实现：
-
-JS描述：
+JavaScript 语言描述：
 
 ```js
 // 交换
@@ -49,7 +47,7 @@ bubbleSort(array);
 console.log(array);
 ```
 
-Java描述：
+Java 语言描述：
 
 ```java
 package algorithm;
@@ -70,7 +68,6 @@ public class Sorting {
         boolean swapped;
 
         for (i = 0; i < array.length; i++) {
-
             swapped = false;
 
             for (j = 0; j < array.length - 1 - i; j++) {
@@ -98,7 +95,7 @@ public class Sorting {
 }
 ```
 
-C语言描述：
+C 语言描述：
 
 ```c
 #include <stdio.h>
@@ -113,7 +110,6 @@ void swap(int *array, int i, int j);
 void bubbleSort(int *array, int size);
 
 int main(int argc, const char * argv[]) {
-    
     int array[] = {39, 28, 57, 12, 95, 45, 10, 73};
     
     int size = sizeof(array) / sizeof(array[0]);

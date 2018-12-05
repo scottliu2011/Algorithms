@@ -1,53 +1,53 @@
-简明扼要地总结一下选择排序的要点，拿n个元素的数组升序排列举例：
+简明扼要地总结一下选择排序的要点，拿 n 个元素的数组升序排列举例：
 
 1. 先以数组第一个位置做参照，然后遍历后续元素，遍历过程中会跟第一个的元素进行比较，如果其值小于第一个元素，则交换；
 2. 一趟下来，最小值被交换到了第一个位置，然后，数组的第二个位置将作为新的参照，开始新一轮的比较和交换。
-3. 排序将会持续n-1轮，也就是说，最后一趟排序，将会是倒数第二个元素和最后一个元素进行比较。
+3. 排序将会持续 n-1 轮，也就是说，最后一趟排序，将会是倒数第二个元素和最后一个元素进行比较。
 
 以上过程在每轮比较中，存在多次交换，比较高效的做法是，在每一轮比较中，找到这一轮中最小的那个元素，然后与此轮参照元素进行交换，只执行一次交换即可。
 
 下面是实现代码：
 
-JS描述：
+JavaScript 语言描述：
 
 ```js
 // 交换函数
 function swap(array, i, j) {
-    var temp = array[i];
-    array[i] = array[j];
-    array[j] = temp;
+  let temp = array[i];
+  array[i] = array[j];
+  array[j] = temp;
 }
 
 // 选择排序
 function selectSort(array) {
-    var i, j;
-    var indexOfMin;                 // 用于标识每趟比较中最小值的索引
-    var size = array.length;
+  let i, j;
+  let indexOfMin;           // 用于标识每趟比较中最小值的索引
+  let size = array.length;
   
-    for (i = 0; i < size - 1; i++) {
-        indexOfMin = i;             // 每次初始化最小值的索引为第一个
+  for (i = 0; i < size - 1; i++) {
+    indexOfMin = i;         // 每次初始化最小值的索引为第一个
     
-        for (j = i + 1; j < size; j++) {
-            if (array[j] < array[indexOfMin]) {
-                indexOfMin = j;     // 如果找到更小的值则更新indexOfMin
-            }
-        }
-    
-        // 交换
-        if (i != indexOfMin) {
-            swap(array, i, indexOfMin);
-        }
+    for (j = i + 1; j < size; j++) {
+      if (array[j] < array[indexOfMin]) {
+        indexOfMin = j;     // 如果找到更小的值则更新indexOfMin
+      }
     }
+    
+    // 交换
+    if (i !== indexOfMin) {
+      swap(array, i, indexOfMin);
+    }
+  }
 }
 
-var array = [39, 28, 57, 12, 95, 45, 10, 73];
+let array = [39, 28, 57, 12, 95, 45, 10, 73];
 
 selectSort(array);
 
 console.log(array);
 ```
 
-Java描述：
+Java 语言描述：
 
 ```java
 package algorithm;
@@ -92,7 +92,7 @@ public class Sorting {
 }
 ```
 
-C语言描述：
+C 语言描述：
 
 ```c
 #include <stdio.h>

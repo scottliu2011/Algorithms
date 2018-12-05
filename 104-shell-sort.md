@@ -6,14 +6,12 @@
 
 最后一轮时，增量已经变为1，等同于一次直接插入排序，不过这时数组元素已趋于有序状态。
 
-下面是实现代码：
-
-JS描述：
+JavaScript 语言描述：
 
 ```js
 // 根据当前增量对分组进行直接插入排序
 function groupsInsertSort(array, increment) {
-  var i, j, key;
+  let i, j, key;
   
   // 从分组基本单位'增量'开始向后扫描，会出现若干个分组
   for (i = increment; i < array.length; i++) {
@@ -33,7 +31,7 @@ function groupsInsertSort(array, increment) {
 // 希尔排序
 function shellSort(array) {
   // 增量初始值设定为数组长度的一半
-  var increment = Math.floor(array.length / 2);
+  let increment = Math.floor(array.length / 2);
   
   // 最小增量为1，是最后一轮
   while (increment > 0) {
@@ -45,14 +43,14 @@ function shellSort(array) {
   }
 }
 
-var array = [39, 28, 57, 12, 95, 45, 10, 73];
+let array = [39, 28, 57, 12, 95, 45, 10, 73];
 
 shellSort(array);
 
 console.log(array);
 ```
 
-Java描述：
+Java 语言描述：
 
 ```java
 package algorithm;
@@ -97,7 +95,7 @@ public class Sorting {
 }
 ```
 
-C语言描述：
+C 语言描述：
 
 ```c
 #include <stdio.h>

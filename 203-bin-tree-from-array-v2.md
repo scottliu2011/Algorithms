@@ -2,82 +2,80 @@
 
 不过这种思路显得不够开阔，算法不够精简，代码也有些冗余，所以今天记录一个改进版的构建函数。
 
-![](http://img.blog.csdn.net/20160715152758744)
+
+![image.png | left | 330x268](https://cdn.nlark.com/yuque/0/2018/png/106385/1545952452254-6f822d6f-8fe1-47c9-aa33-535229821264.png "")
+
 
 还是同样一张图，还是同样的存储结构：
 
-	['A', 'B', 'E', 'C', 'D', '#', 'F']
+```
+['A', 'B', 'E', 'C', 'D', '#', 'F']
+```
 
 这次我们的思路如下：
 
-在满二叉树中，每一层的节点树必定是上一层的2倍，如果我们记录父节点的指针（从0开始，即根节点）和当前子节点的指针（从1开始，即第二层第一个子节点），当前层每遍历2个节点，父层节点遍历1个，如果当前层遍历完成并开始下一层时，父层的节点必然也遍历完了，并且父节点指针也指向了下一层的第一个节点。
+在满二叉树中，每一层的节点树必定是上一层的 2 倍，如果我们记录父节点的指针（从 0 开始，即根节点）和当前子节点的指针（从 1 开始，即第二层第一个子节点），当前层每遍历2个节点，父层节点遍历1个，如果当前层遍历完成并开始下一层时，父层的节点必然也遍历完了，并且父节点指针也指向了下一层的第一个节点。
 
-所以逐个遍历存储结构中的数据，当前节点遍历2个，父节点指针增1，即可完成整个构建的过程。
+所以逐个遍历存储结构中的数据，当前节点遍历 2 个，父节点指针增 1，即可完成整个构建的过程。
 
-下面是实现代码：
-
-JS版：
+JavaScript 语言描述：
 
 ```js
-//二叉树节点结构
+// 二叉树节点结构
 function BinTreeNode(data) {
   this.data = data;
   this.leftChild = null;
   this.rightChild = null;
 }
 
-//改进版：根据顺序存储序列创建二叉树
+// 改进版：根据顺序存储序列创建二叉树
 function createBinTreeByArrayV2(array) {
+  // 节点数组，用于放置新建的节点
+  let nodeArray = [];
 
-  //节点数组，用于放置新建的节点
-  var nodeArray = [];
-
-  //父节点指针
-  var parent = 0;
-  //当前节点指针
-  var current = 0;
+  // 父节点指针
+  let parent = 0;
+  // 当前节点指针
+  let current = 0;
 
   while (current < array.length) {
-    var node = null;
+    let node = null;
 
     if (array[current] != '#') {
       node = new BinTreeNode(array[current]);
       nodeArray.push(node);
     }
 
-    //当前节点指针至少为1时，即至少是第二层节点，才开始跟父节点关联
+    // 当前节点指针至少为1时，即至少是第二层节点，才开始跟父节点关联
     if (current > 0) {
-      
       if (current % 2 !== 0) {
-        //作为左子节点
+        // 作为左子节点
         nodeArray[parent].leftChild = node;
       } else {
-        //作为右子节点
+        // 作为右子节点
         nodeArray[parent].rightChild = node;
-
-        //父节点指针推进一个位置
+        // 父节点指针推进一个位置
         parent++;
       }
-
     }
 
-    //每遍历一个节点，当前节点指针推进一个位置
+    // 每遍历一个节点，当前节点指针推进一个位置
     current++;
   }
   
-  //返回根节点
+  // 返回根节点
   return nodeArray[0];
 }
 ```
 
-Java版：
+Java 语言描述：
 
 ```java
-//BinTreeNode.java
+// BinTreeNode.java
 
 package algorithm;
 
-//二叉树节点结构
+// 二叉树节点结构
 public class BinTreeNode {
     private char data;
     private BinTreeNode leftChild;
@@ -113,15 +111,14 @@ public class BinTreeNode {
 }
 
 
-//BinTreeCreator.java
+// BinTreeCreator.java
 
 package algorithm;
 
 public class BinTreeCreator {
 
-    //改进版：根据顺序存储序列创建二叉树
+    // 改进版：根据顺序存储序列创建二叉树
     public static BinTreeNode createBinTreeByArrayV2(char[] array) {
-
         BinTreeNode[] nodeArray = new BinTreeNode[array.length];
 
         int parent = 0;
@@ -140,7 +137,6 @@ public class BinTreeCreator {
                     nodeArray[parent].setLeftChild(node);
                 } else {
                     nodeArray[parent].setRightChild(node);
-
                     parent++;
                 }
             }
@@ -153,18 +149,17 @@ public class BinTreeCreator {
 }
 ```
 
-C语言版：
+C 语言描述：
 
 ```c
-//二叉树节点结构体
+// 二叉树节点结构体
 typedef struct node {
     char data;
     struct node *lchild, *rchild;
 } BinTreeNode;
 
-//改进版：根据顺序存储序列创建二叉树
+// 改进版：根据顺序存储序列创建二叉树
 BinTreeNode * createBinTreeByArrayV2(char *array, int size) {
-    
     BinTreeNode **nodeArray = (BinTreeNode **) malloc(sizeof(BinTreeNode *) * size);
     
     int parent = 0;
@@ -175,6 +170,7 @@ BinTreeNode * createBinTreeByArrayV2(char *array, int size) {
         
         if (array[current] != '#') {
             node = (BinTreeNode *) malloc(sizeof(BinTreeNode));
+            
             node->data = array[current];
             node->lchild = NULL;
             node->rchild = NULL;
@@ -183,12 +179,10 @@ BinTreeNode * createBinTreeByArrayV2(char *array, int size) {
         }
         
         if (current > 0) {
-            
             if (current % 2 != 0) {
                 nodeArray[parent]->lchild = node;
             } else {
                 nodeArray[parent]->rchild = node;
-                
                 parent++;
             }
         }
@@ -202,4 +196,6 @@ BinTreeNode * createBinTreeByArrayV2(char *array, int size) {
     
     return rootNode;
 }
+
+// ...
 ```

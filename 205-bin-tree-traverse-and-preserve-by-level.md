@@ -10,8 +10,8 @@
 按层次遍历思路：
 
 1. 首先将根节点放入队列。
-2. 取出队首元素并访问该节点，然后探索其左子树，如果左子树不为空，则重复步骤1，之后再探索右子树，如果右子树不为空，则同样重复步骤1。
-3. 重复步骤2。
+2. 取出队首元素并访问该节点，然后探索其左子树，如果左子树不为空，则重复步骤 1，之后再探索右子树，如果右子树不为空，则同样重复步骤 1。
+3. 重复步骤 2。
 
 按层次存储思路：
 
@@ -21,76 +21,86 @@
 2. 在取出队首元素后，如果这个节点是占位节点，则无需探索左右子节点，直接进行下一轮遍历。
 3. 遍历完成后，存储数据的末端会有一些冗余的占位节点，移除即可。
 
-还是先来个JS版的吧，JS中的数组是天然的队列，再方便不过了：
+先来个 JavaScript 语言描述吧，JavaScript 中的数组是天然的队列，再方便不过了：
 
 ```js
-//二叉树节点结构
+// 二叉树节点结构
 function BinTreeNode(data) {
   this.data = data;
   this.leftChild = null;
   this.rightChild = null;
 }
 
-//按层次遍历
+// 按层次遍历
 function traverseByLevel(node, visitFn) {
-  if (!node) return;
+  if (!node) {
+    return;
+  }
 
-  //队列
+  // 队列
   var queue = [];
 
-  //根节点入队
+  // 根节点入队
   queue.push(node);
 
   while (queue.length) {
-    //队首元素出队
+    // 队首元素出队
     node = queue.shift();
 
-    //访问节点
+    // 访问节点
     visitFn(node);
 
-    //如果左子节点存在，则将其入队
-    if (node.leftChild) queue.push(node.leftChild);
+    // 如果左子节点存在，则将其入队
+    if (node.leftChild) {
+      queue.push(node.leftChild);
+    }
 
-    //如果右子节点存在，则将其入队
-    if (node.rightChild) queue.push(node.rightChild);
+    // 如果右子节点存在，则将其入队
+    if (node.rightChild) {
+      queue.push(node.rightChild);
+    }
   }
 
 }
 
-//按层次存储
+// 按层次存储
 function preserveByLevel(node) {
-  if (!node) return;
+  if (!node) {
+    return;
+  }
 
-  //队列
+  // 队列
   var queue = [];
 
-  //根节点入队
+  // 根节点入队
   queue.push(node);
 
-  //顺序存储数据
+  // 顺序存储数据
   var storage = [];
 
-  //占位节点
+  // 占位节点
   var holderNode = new BinTreeNode('#');
 
   while (queue.length) {
-    //队首元素出队
+    // 队首元素出队
     node = queue.shift();
 
-    //存储当前节点数据
+    // 存储当前节点数据
     storage.push(node.data);
 
-    //如果队首的节点为占位节点，则不再继续探索其左右节点了
-    if (node.data === '#') continue;
+    // 如果队首的节点为占位节点，则不再继续探索其左右节点了
+    if (node.data === '#') {
+      continue;
+    }
 
-    //将左子节点或占位节点入队
+    // 将左子节点或占位节点入队
     if (node.leftChild) {
       queue.push(node.leftChild);
     } else {
       queue.push(holderNode);
     }
 
-    //将右子节点或占位节点入队
+    // 将右子节点或占位节点入队
     if (node.rightChild) {
       queue.push(node.rightChild);
     } else {
@@ -98,12 +108,12 @@ function preserveByLevel(node) {
     }
   }
 
-  //接下来移除末端多余的占位符
+  // 接下来移除末端多余的占位符
 
   var data = storage[storage.length - 1];
 
   while (data === '#') {
-    //移除末端占位符
+    // 移除末端占位符
     storage.pop();
 
     data = storage[storage.length - 1];

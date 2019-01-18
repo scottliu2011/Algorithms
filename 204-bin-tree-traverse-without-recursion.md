@@ -10,7 +10,7 @@
 
 2. 然后将栈顶元素陆续出栈，探索其右子树，如果存在右子树，则按上面步骤继续访问并入栈子树根节点，如果右子树为空，则继续将父节点出栈，探索父节点的右子树，如此进行下去。
 
-3. 进行到整棵树的根节点A出栈后，探索根节点A的右子树，仍然重复步骤1，对其子树进行入栈操作，然后重复步骤2。
+3. 进行到整棵树的根节点 A 出栈后，探索根节点 A 的右子树，仍然重复步骤1，对其子树进行入栈操作，然后重复步骤 2。
 
 4. 直到当前探索的节点为空并且栈也为空，程序终止，遍历完成。
 
@@ -23,33 +23,32 @@
 后序遍历需要先访问左右子节点，访问完了再访问这个父节点，相比较前序和中序，稍稍有些复杂：
 
 1. 对于一棵子树来说，需要先将根节点入栈。
-2. 探索这个根节点的左子节点，如果存在，将左子节点入栈，然后继续探索这个子节点的左子节点。
-3. 如果当前左子节点存在，则重复步骤1和2，如果这个左子节点是叶子节点，则开始出栈，并访问该节点，然后再获取栈顶的父节点（不出栈），探索其右子节点。
+2. 探索这个根节点的左子节点，如果存在，将左子节点入栈，然后继续探索这个子节点的左子结点。
+3. 如果当前左子节点存在，则重复步骤 1 和 2，如果这个左子节点是叶子节点，则开始出栈，并访问该节点，然后再获取栈顶的父节点（不出栈），探索其右子节点。
 4. 如果父节点存在右子节点，则重复前面几个步骤，如果右子节点是叶子节点，则将其出栈并访问该节点。
 5. 最后再次出栈当前栈顶父节点，并访问该父节点。
 6. 对于树中的每一棵子树重复上述过程。
 
 
-下面是实现代码，先来个JS版的：
+下面使用 JavaScript 语言来描述：
 
 ```js
-//二叉树节点结构
+// 二叉树节点结构
 function BinTreeNode(data) {
   this.data = data;
   this.leftChild = null;
   this.rightChild = null;
 }
 
-//非递归前序遍历
-function preOrderTraverseWithoutRecursion(node, visitFn) {
-  //模拟栈
-  var stack = [];
-  var top = -1;
+// 非递归前序遍历
+function preOrderTraverseNonRecursion(node, visitFn) {
+  // 模拟栈
+  let stack = [];
+  let top = -1;
 
   while (node || top >= 0) {
-    
     while (node) {
-      //访问当前根节点
+      // 访问当前根节点
       visitFn(node);
 
       //将当前根节点入栈
@@ -60,127 +59,121 @@ function preOrderTraverseWithoutRecursion(node, visitFn) {
     }
 
     if (top >= 0) {
-      //将栈顶元素出栈
+      // 将栈顶元素出栈
       node = stack[top--];
 
-      //下一轮遍历右子树
+      // 下一轮遍历右子树
       node = node.rightChild;
     }
 
   }
 }
 
-//非递归中序遍历
-function inOrderTraverseWithoutRecursion(node, visitFn) {
-  var stack = [];
-  var top = -1;
+// 非递归中序遍历
+function inOrderTraverseNonRecursion(node, visitFn) {
+  let stack = [];
+  let top = -1;
 
   while (node || top >= 0) {
-    
     while (node) {
-      //将当前节点入栈
+      // 将当前节点入栈
       stack[++top] = node;
       
-      //下一轮遍历左子树
+      // 下一轮遍历左子树
       node = node.leftChild;
     }
 
     if (top >= 0) {
-      //将栈顶元素出栈
+      // 将栈顶元素出栈
       node = stack[top--];
       
-      //访问当前节点，不同的是，这里在出栈阶段访问，左子节点必然在父节点之前出栈
+      // 访问当前节点，不同的是，这里在出栈阶段访问，左子节点必然在父节点之前出栈
       visitFn(node);
 
-      //下一轮遍历当前节点的右子树
+      // 下一轮遍历当前节点的右子树
       node = node.rightChild;
     }
 
   }
 }
 
-//后序遍历
-function postOrderTraverseWithoutRecursion(node, visitFn) {
+// 后序遍历
+function postOrderTraverseNonRecursion(node, visitFn) {
+  if (!node) {
+    return;
+  }
 
-  if (!node) return;
+  let stack = [];
+  let top = -1;
 
-  var stack = [];
-  var top = -1;
+  // 上一次遍历的节点
+  let prev = null;
+  // 当前遍历的节点
+  let curr = null;
 
-  //上一次遍历的节点
-  var prev = null;
-  //当前遍历的节点
-  var curr = null;
-
-  var prevIsParent = function() {
+  let prevIsParent = function () {
     return !prev || prev.leftChild === curr || prev.rightChild === curr;
   };
-  var prevIsLeftChild = function() {
+  let prevIsLeftChild = function () {
     return prev === curr.leftChild;
   };
-  var prevIsRightChild = function() {
+  let prevIsRightChild = function () {
     return prev === curr.rightChild;
   };
 
-  //将根节点入栈
+  // 将根节点入栈
   stack[++top] = node;
 
   while (top >= 0) {
-    //取出栈顶元素作为当前节点
+    // 取出栈顶元素作为当前节点
     curr = stack[top];
 
-    if (prevIsParent()) {             //从根节点向下探索
-      
-      if (curr.leftChild) {             //将当前节点的左子节点入栈
+    if (prevIsParent()) {               // 从根节点向下探索
+      if (curr.leftChild) {             // 将当前节点的左子节点入栈
         stack[++top] = curr.leftChild;
-      } else if (curr.rightChild) {     //将当前节点的右子节点入栈
+      } else if (curr.rightChild) {     // 将当前节点的右子节点入栈
         stack[++top] = curr.rightChild;
-      } else {                          //如果没有左右子节点，则访问
+      } else {                          // 如果没有左右子节点，则访问
         visitFn(curr);
-        top--;  //栈顶指针减1，模拟出栈
+        top--;   // 栈顶指针减1，模拟出栈
       }
-
-    } else if (prevIsLeftChild()) {   //从左子树回到根节点
-      
-      if (curr.rightChild) {  //如果当前根节点存在右子节点，则入栈
+    } else if (prevIsLeftChild()) {     // 从左子树回到根节点
+      if (curr.rightChild) {            // 如果当前根节点存在右子节点，则入栈
         stack[++top] = curr.rightChild;
-      } else {                //如果不存在右子节点，则访问该根节点
+      } else {                          // 如果不存在右子节点，则访问该根节点
         visitFn(curr);
-        top--;  //栈顶指针减1，模拟出栈
+        top--;   // 栈顶指针减1，模拟出栈
       }
-
-    } else if (prevIsRightChild()) {  //从右子树回到根节点
-      
+    } else if (prevIsRightChild()) {    // 从右子树回到根节点
       visitFn(curr);
-      top--;    //栈顶指针减1，模拟出栈
-
+      top--;    // 栈顶指针减1，模拟出栈
     }
 
-    //更新
+    // 更新
     prev = curr;
   }
 }
 
-//改进版：非递归前序遍历
-function preOrderTraverseWithoutRecursionV2(node, visitFn) {
-  var stack = [];
-  var top = -1;
+// 非递归前序遍历<改进版>
+function preOrderTraverseNonRecursionV2(node, visitFn) {
+  let stack = [];
+  let top = -1;
 
   stack[++top] = node;
 
   while (top >= 0) {
-    //取出栈顶元素
+    // 取出栈顶元素
     node = stack[top--];
 
-    //访问当前节点
+    // 访问当前节点
     visitFn(node);
 
-    //将右子树根节点入栈
+    // 将右子树根节点入栈
     if (node.rightChild) {
       stack[++top] = node.rightChild;
     }
 
-    //将左子树根节点入栈
+    // 将左子树根节点入栈
     if (node.leftChild) {
       stack[++top] = node.leftChild;
     }

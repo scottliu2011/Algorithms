@@ -1,3 +1,4 @@
+// 使用标志位
 
 function assign(array) {
   const count = array.length;
@@ -16,6 +17,8 @@ function assign(array) {
       return i;
     }
   }
+
+  return count;
 }
 
 const array = [5, 3, 0, 4, 1, 9, 7, 2];
